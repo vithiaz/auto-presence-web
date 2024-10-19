@@ -20,6 +20,8 @@ const Add: React.FC<TProps> = ({ guru, setGuru }) => {
     formState: { errors },
   } = useForm<TInputs>()
 
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     const formData = new FormData()
     Array.from(data.photos).forEach((file) => {
@@ -28,7 +30,7 @@ const Add: React.FC<TProps> = ({ guru, setGuru }) => {
     formData.append('name', data.name)
 
     axios
-      .post('http://localhost:5000/guru', formData, {
+      .post(`${API_HOST}/guru`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -19,9 +19,11 @@ const RekapForm: React.FC<TProps> = ({ setDays, setRekap }) => {
     formState: { errors },
   } = useForm<TInputs>()
 
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     axios
-      .get(`http://localhost:5000/guru/rekap?date=${data.date}`, {
+      .get(`${API_HOST}/guru/rekap?date=${data.date}`, {
         timeout: 5000,
       })
       .then((res) => {

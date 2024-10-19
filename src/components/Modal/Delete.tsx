@@ -10,9 +10,11 @@ type TDelete = {
 }
 
 const Delete: React.FC<TDelete> = ({ _id, name, guru, setGuru }) => {
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+  
   const onClickHandler = () => {
     axios
-      .delete(`http://localhost:5000/guru?id=${_id}&name=${name}`, {
+      .delete(`${API_HOST}/guru?id=${_id}&name=${name}`, {
         timeout: 5000,
       })
       .then((res) => {

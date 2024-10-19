@@ -25,9 +25,11 @@ const Edit: React.FC<TProps> = ({ _id, oldName, guru, setGuru }) => {
   const onSubmit: SubmitHandler<TInputs> = (data) => {
     const { name } = data
 
+    const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
     axios
       .put(
-        'http://localhost:5000/guru',
+        `${API_HOST}/guru`,
         { _id, name, oldName },
         { timeout: 5000 }
       )

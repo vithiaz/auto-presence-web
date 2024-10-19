@@ -19,9 +19,11 @@ const Rekap: React.FC = () => {
   const [days, setDays] = useState<Array<number>>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
   useEffect(() => {
     axios
-      .get('http://localhost:5000/guru/rekap', {
+      .get(`${API_HOST}/guru/rekap`, {
         timeout: 5000,
       })
       .then((res) => {

@@ -9,6 +9,7 @@ type TGuru = {
 }
 
 export default function Home() {
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const videoWidth = 640
   const videoHeight = 480
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -28,7 +29,7 @@ export default function Home() {
     }
 
     axios
-      .get('http://localhost:5000/guru', { timeout: 5000 })
+      .get(`${API_HOST}/guru`, { timeout: 5000 })
       .then((res) => {
         console.log(res)
         setGuru(res.data.data)
@@ -48,7 +49,7 @@ export default function Home() {
       setTimeout(() => {
         axios
           .post(
-            'http://localhost:5000/guru/presence',
+            `${API_HOST}/guru/presence`,
             { name },
             { timeout: 5000 }
           )
@@ -68,7 +69,7 @@ export default function Home() {
         guru.map(async (guru) => {
           const faceDescriptors: any[] = []
           guru.photos.forEach(async (photo) => {
-            const imageUrl = `http://localhost:5000${photo}`
+            const imageUrl = `${API_HOST}${photo}`
             const image = await faceapi.fetchImage(imageUrl)
 
             const fullFaceDescription = await faceapi

@@ -17,9 +17,11 @@ const Guru: React.FC = () => {
   const [status, setStatus] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
   useEffect(() => {
     axios
-      .get('http://localhost:5000/guru', {
+      .get(`${API_HOST}/guru`, {
         timeout: 5000,
       })
       .then((res) => setGuru(res.data.data))
